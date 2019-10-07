@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConstantsService } from '../common/services/constants.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,14 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   loadAPI: Promise<any>;
+  env:string;
 
 constructor() {
+    this.env=ConstantsService.baseURL;
     this.loadAPI = new Promise((resolve) => {
     	let scriptsLoad=[];
-		scriptsLoad[0]='/../../assets/js/jquerydashboard.min.js';
-		scriptsLoad[1]='/../../assets/js/bootstrapdashboard.min.js';
-		scriptsLoad[2]='/../../assets/js/sidebarmenu.js';
-		scriptsLoad[3]='/../../assets/js/mar_common.js';
+		scriptsLoad[0]=this.env+'/assets/js/jquerydashboard.min.js';
+		scriptsLoad[1]=this.env+'/assets/js/bootstrapdashboard.min.js';
+		scriptsLoad[2]=this.env+'/../../assets/js/sidebarmenu.js';
+		scriptsLoad[3]=this.env+'/assets/js/mar_common.js';
 		for(let j=0;j<scriptsLoad.length;j++){
 	        let node = this.loadScript(scriptsLoad[j]);
 	        if (node) {
