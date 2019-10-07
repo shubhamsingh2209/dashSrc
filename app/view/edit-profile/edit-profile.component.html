@@ -1,0 +1,130 @@
+<div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Form Basic</h4>
+                        <!-- <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+ <div class="container-fluid">
+     <div class="row">
+         <div class="col-md-12">
+ 				<div class="card">
+
+                            <form class="form-horizontal" (ngSubmit)="onSubmit()" #editProfile="ngForm">
+                                <div class="card-body">
+                                    <h4 class="card-title">Personal Info</h4>
+                                  <!--  <div class="col-sm-12" style="text-align: center;margin-top: -10%;">
+<div class="circle" style="margin-left: 38%;">
+                         <img class="profile-pic" src="/img/1.jpg">               
+
+                                     </div>
+                                     <div class="p-image" style="">
+                                       <i class="icon-camera upload-button" style=""></i>
+                                        <input class="file-upload" type="file" accept="image/*">
+                                     </div>
+                                    </div> -->
+                                    <!-- <div style="text-align: center;margin-top: -10%;padding-bottom: 30px;"><img src="/img/1.jpg" alt="user" width="50" class="rounded-circle" style="width: 13%;"></div> -->
+                                    
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" required [(ngModel)]="editdata1.name" name="name"#name="ngModel">
+                                            <!-- <input type="text" class="form-control" name="name" [placeholder]="userdataFinal === undefined ? '': userdataFinal.data.name" disabled> -->
+                                            <span style="color:red" [hidden]="name.valid || name.pristine">Name is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+	                                    <label class="col-md-3 text-right control-label col-form-label">Gender</label>
+	                                    <div class="col-md-9" id="asdasd">
+	                                     <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="M" name="radio-stacked" [attr.checked]="userdataFinal.data.gender=='M'?true:false">
+                                            <label class="custom-control-label" for="M">Male</label>
+                                        </div>
+                                         <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="F" name="radio-stacked" [attr.checked]="userdataFinal.data.gender=='F'?true:false">
+                                            <label class="custom-control-label" for="F">Female</label>
+                                        </div>
+                                         <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="O" name="radio-stacked" [attr.checked]="userdataFinal.data.gender=='O'?true:false">
+                                            <label class="custom-control-label" for="O">Other</label>
+                                        </div>
+	                                        
+	                                    </div>
+                                  </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" disabled [(ngModel)]="editdata1.email" name="email"#email="ngModel">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">City<span style="color: red;">*</span></label>
+                                        <div class="col-sm-9">
+                                       <!--      <input type="text" class="form-control" id="email1" placeholder="Company Name Here"> -->
+                                            <select class="select2 form-control custom-select" required [(ngModel)]="editdata1.city" name="city" #city="ngModel" style="width: 100%; height:36px;">
+                                                <option>Select</option>
+                                                <option *ngFor="let data of citydata1.data" [value]="data.id">{{data.name}}</option>
+                                                
+                                        </select>
+                                        <span style="color:red" [hidden]="city.valid || city.pristine">City is required</span>   
+                                        </div>
+                                    </div>
+                                     <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Organization Name<span style="color: red;">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" required [(ngModel)]="editdata1.orgname" name="orgname" #orgname="ngModel" placeholder="Please enter Organization name">
+                                            <span style="color:red" [hidden]="orgname.valid || orgname.pristine">Organization name is required</span>
+                                        </div>
+                                    </div>
+                                     <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Designation<span style="color: red;">*</span></label>
+                                        <div class="col-sm-9">
+                                            <select class="select2 form-control custom-select" required [(ngModel)]="editdata1.orgdesignation" name="desi" #desi="ngModel" style="width: 100%; height:36px;">
+                                                <option>Select</option>     
+                                                <option [value]="AD">Admin</option>
+                                                <option [value]="SAD">Super Admin</option>  
+                                        </select>
+                                        <span style="color:red" [hidden]="desi.valid || desi.pristine">Designation is required</span>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">About<span style="color: red;">*</span></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" required [(ngModel)]="editdata1.about" name="about" #about="ngModel">{{editdata1.about}}</textarea>
+                                            <span style="color:red" [hidden]="about.valid || about.pristine">About is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No<span style="color: red;">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" required [(ngModel)]="editdata1.phoneno" name="contact" #contact="ngModel">
+                                            <span style="color:red" [hidden]="contact.valid || contact.pristine">Contact no  is required</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body" style="float: right;">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                       </div>
+                     </div>
+                    </div>
+                  </div>
