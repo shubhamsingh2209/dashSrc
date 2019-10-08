@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConstantsService } from '../../common/services/constants.service';
 import {DataAccessService } from '../../common/services/data-access.service'
 
@@ -18,7 +18,8 @@ class editdata {
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  styleUrls: ['./edit-profile.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class EditProfileComponent implements OnInit {
@@ -33,10 +34,7 @@ editdata1=new editdata(null,null,null,null,null,null,null,null);
 constructor(private dataccess: DataAccessService) {
  
   this.env=ConstantsService.baseURL;
- 
-  this.api=ConstantsService.baseApiURL;
- 
-  this.citydata1=[]; 
+  this.api=ConstantsService.baseApiURL; 
   	this.loadAPI = new Promise((resolve) => {
     	let scriptsLoad=[];
         scriptsLoad[0]=this.env+'/assets/js/profilepic.js';
@@ -51,7 +49,15 @@ constructor(private dataccess: DataAccessService) {
               }
          }
     });
+   
+ }
 
+  ngOnInit() {
+  	 this.loadAPI
+        .then((flag) => {
+        //Do something when script is loaded and parsed by browser
+    });
+    this.citydata1=[];
     this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/city').subscribe(citydata => {
       this.citydata1 = citydata;
     });
@@ -74,17 +80,9 @@ constructor(private dataccess: DataAccessService) {
         this.userdataFinal.data.phoneno
         );      
     });
-   
- }
-
-  ngOnInit() {
-  	 this.loadAPI
-        .then((flag) => {
-        //Do something when script is loaded and parsed by browser
-    });
     
   }
-  loadScript(scripted) {
+  loadScript(scripted: any) {
     let node = undefined;
     let isFound = false;
     const scripts = document.getElementsByTagName('script')

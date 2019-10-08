@@ -1,3 +1,227 @@
-<p>
-  residence works!
-</p>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+       <div class="row">
+          <div class="col-12 d-flex no-block align-items-center">
+             <h4 class="page-title">Residence Data</h4>
+             <!-- <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Library</li>
+                    </ol>
+                </nav>
+                </div> -->
+          </div>
+       </div>
+    </div>
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="card">
+                <form class="form-horizontal">
+                   <div class="card-body">
+                      <div class="heading addresident" style="padding: 0.75rem 1.25rem;margin-bottom: 0;background-color: rgba(0, 0, 0, 0.03);border-bottom: 0px solid transparent;">
+                         <span><b>ADD RESIDENCE</b></span>
+                         <span style="float: right;margin-top: -7px;"><button type="button" class="btn btn-outline-success" id="residencedraft">Save as draft</button></span>
+                         <span style="float: right;margin-top: -7px;display: none"><button type="button" class="btn btn-outline-success" id="editresidencedraft">Edit</button></span>
+                      </div>
+                      <div class="row" id="residentshow" style="margin-top:2%">
+                         <div class="col-md-6">
+                            <div class="form-group row">
+                               <label for="fname" class="col-sm-3 text-right control-label col-form-label">Name<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <input type="text" class="form-control" name="residenceName" id="residenceName" placeholder="Enter Residence Name Here" required>
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row" style="margin-left: 3%">
+                               <div class="col-md-6 row">
+                                  <label for="fname" class="col-sm-6 text-right control-label col-form-label">House No.<span style="color: red;">*</span></label>
+                                  <input type="text" style="width: 50%;" class="form-control" id="houseno" placeholder="House No">
+                                  <div class="invalid-feedback" style="margin-left: 50%"></div>
+                               </div>
+                               <div class="col-md-6 row text-right" style="margin-left: 22px;">
+                                  <label for="fname" class="col-sm-4 control-label col-form-label" style="float: center!important;text-align: center!important;">Block<span style="color: red;">*</span></label>
+                                  <input type="text" style="width: 65%;" class="form-control" id="block" placeholder="Block No.">
+                                  <div class="invalid-feedback" style="text-align: center;margin-left: 20%;"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label for="fname" class="col-sm-3 text-right control-label col-form-label">Landmark<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <input type="text" class="form-control" id="landmark" placeholder="Enter Landmark Here">
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label for="email1" class="col-sm-3 text-right control-label col-form-label">City<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <!--      <input type="text" class="form-control" id="email1" placeholder="Company Name Here"> -->
+                                  <select class="form-control custom-select" style="width: 100%; height:36px;" id="citydata">
+                                     <option>Select City</option>
+                                     <option *ngFor="let data of cityData.data" [value]="data.id" [attr.data-location]="(data.lat)+(',')+(data.lng)">{{data.name}}</option>
+                          
+                                  </select>
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Address<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <textarea class="form-control" id="addressuser"></textarea>
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label for="fname" class="col-sm-3 text-right control-label col-form-label">Pincode<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <input type="text" class="form-control" id="pincode" placeholder="Enter Pincode Here">
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label class="col-md-3 text-right control-label col-form-label">Amenties<span style="color: red;">*</span></label>
+                               <div class="col-md-9">
+                                  <select class="select2 form-control m-t-15" id="resi_ament" multiple="multiple" style="height: 36px;width: 100%;">
+                                     <option *ngFor="let data of amenData.data" [value]="data.value">{{data.name}}</option>
+                                  </select>
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label class="col-md-3 text-right control-label col-form-label">RoomCount<span style="color: red;">*</span></label>
+                               <div class="col-sm-9">
+                                  <input type="text" class="form-control" id="roomcount" placeholder="Enter RoomCount Here">
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                            <div id="map" style="height:80%"></div>
+                            <div class="form-group row" style="padding-top: 20px">
+                               <label class="col-md-2 control-label col-form-label" style="padding-right: 0px">Furnishing<span style="color: red;">*</span> </label>
+                               <div class="col-md-10">
+                                  <select class="select2 form-control" id="resi_furn" multiple="multiple" style="height: 36px;width: 100%;">
+                                     <option>Select Furnishing</option>
+                                     <option *ngFor="let data of furnData.data" [value]="data.value">{{data.name}}</option>
+                                  </select>
+                                  <div class="invalid-feedback"></div>
+                               </div>
+                            </div>
+                         </div>
+                         <input type="hidden" id="residencelat" value="">
+                      </div>
+                   </div>
+                </form>
+             </div>
+             <!-- ADD room block -->
+             <div class="card countroomdata">
+                <form class="form-horizontal">
+                   <div class="card-body">
+                      <div class="heading addroom" style="padding: 0.75rem 1.25rem;margin-bottom: 0;background-color: rgba(0, 0, 0, 0.03);border-bottom: 0px solid transparent;">
+                         <span><b>ADD ROOM</b></span>
+                      </div>
+                      <div class="form-group row" style="margin-top: 2%;margin-bottom: 0px;">
+                         <div class="col-md-6">
+                            <div class="card" style="margin-bottom: 0px">
+                             <table class="table">
+                                 <tbody>
+                                     <tr>
+                                         <td>
+                                             <div class="custom-control custom-checkbox">
+                                                 <input type="checkbox" class="custom-control-input" id="seat1input">
+                                                 <label class="custom-control-label todo-label" for="seat1input">
+                                                 </label>
+                                             </div>
+                                         </td>
+                                         <td class="text-success"> <label>Single Seater</label></td>
+                                         <td>
+                                             <div class="number singleseater">
+                                                 <span class="minus">-</span>
+                                                 <input type="text" value="0"/>
+                                                 <span class="plus">+</span>
+                                              </div>     
+                                         </td>
+                                         <td>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'single');">ADD</a></span>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td><div class="custom-control custom-checkbox">
+                                                 <input type="checkbox" class="custom-control-input" id="seat2input">
+                                                 <label class="custom-control-label todo-label" for="seat2input">
+                                                 </label>
+                                             </div>
+                                         </td>
+                                         <td class="text-success"> <label>Double Seater</label></td>
+                                         <td>
+                                             <div class="number doubleseater">
+                                                 <span class="minus">-</span>
+                                                 <input type="text" value="0"/>
+                                                 <span class="plus">+</span>
+                                              </div>     
+                                         </td>
+                                         <td>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'double');">ADD</a></span>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                             <div class="custom-control custom-checkbox">
+                                                 <input type="checkbox" class="custom-control-input" id="seat3input">
+                                                 <label class="custom-control-label todo-label" for="seat3input">
+                                                 </label>
+                                             </div>
+                                         </td>
+                                         <td class="text-success"> <label>Triple Seater</label></td>
+                                         <td>
+                                             <div class="number tripleseater">
+                                                 <span class="minus">-</span>
+                                                 <input type="text" value="0"/>
+                                                 <span class="plus">+</span>
+                                              </div>     
+                                         </td>
+                                         <td>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'triple');">ADD</a></span>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                             <div class="custom-control custom-checkbox">
+                                                 <input type="checkbox" class="custom-control-input" id="seat4input">
+                                                 <label class="custom-control-label todo-label" for="seat4input">
+                                                 </label>
+                                             </div>
+                                         </td>
+                                         <td class="text-success"> <label>Four Seater</label></td>
+                                         <td>
+                                             <div class="number fourseater">
+                                                 <span class="minus">-</span>
+                                                 <input type="text" value="0"/>
+                                                 <span class="plus">+</span>
+                                              </div>     
+                                         </td>
+                                         <td>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'four');">ADD</a></span>
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         </div>
+                         <div class="col-md-6" style="text-align: center;"><img src="../../../assets/img/steps.png" style="width: 50%;"></div>
+                      </div>
+                          <div class="singleroomdata card" style="display: none"></div>
+                            <div class="doubleroomdata card" style="display: none"></div>
+                            <div class="tripleroomdata card" style="display: none"></div>
+                            <div class="fourroomdata card" style="display: none"></div> 
+                     <div class="lastsubmit" style="float: right;padding-bottom: 10px;display: none"><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="finalsubmit(this);">Submit</a></div>        
+                   </div>
+                </form>
+             </div>
+             <!--  end block -->
+            
+          </div>
+       </div>
+    </div>
+ </div>
