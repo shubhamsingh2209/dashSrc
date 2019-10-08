@@ -234,3 +234,14 @@ demo = {
 }
 var map;
 var marker;
+$(".select2").select2(); 
+$(document).ready(function() {
+  // Javascript method's body can be found in assets/js/demos.js
+  demo.initGoogleMaps();
+});
+var geocoder;  
+var infowindow;
+$(document).ready(function(){
+  geocoder = new google.maps.Geocoder;
+  infowindow = new google.maps.InfoWindow;
+}); 

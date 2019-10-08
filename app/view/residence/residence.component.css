@@ -1,0 +1,25 @@
+@import url("../../../assets/css/select2.min.css");
+@import url("../../../assets/css/demo.css");
+span {cursor:pointer; }
+.number{    margin-left: 30px;}
+.minus, .plus{
+        width: 20px;
+        height: 20px;
+        background: #f2f2f2;
+        border-radius: 4px;
+        padding: 0px 5px 0px 5px;
+        border: 1px solid #ddd;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+}
+.number input{
+           height: 22px;
+            width: 50px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+}
