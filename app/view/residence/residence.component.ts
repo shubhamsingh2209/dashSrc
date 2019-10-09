@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConstantsService } from '../../common/services/constants.service';
-import {DataAccessService } from '../../common/services/data-access.service'
+import {DataAccessService } from '../../common/services/data-access.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-residence',
@@ -16,7 +18,9 @@ export class ResidenceComponent implements OnInit {
   cityData:any=[];
   furnData:any=[];
   amenData:any=[];
-  constructor(private dataccess: DataAccessService) {
+  residenceRegisterForm: FormGroup;
+  submitted = false;
+  constructor(private dataccess: DataAccessService,private formBuilder: FormBuilder) {
     this.env=ConstantsService.baseURL;
     this.api=ConstantsService.baseApiURL;
  
@@ -52,9 +56,21 @@ export class ResidenceComponent implements OnInit {
       this.amenData = funisdata;
       console.log(this.amenData);
     });
+    this.residenceRegisterForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      houseno: ['', Validators.required],
+      block: ['', [Validators.required]],
+      landmark: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      pincode: ['', [Validators.required]],
+      amneties: ['', [Validators.required]],
+      funshing: ['', [Validators.required]],
+      roomcount: ['', [Validators.required,Validators.pattern("[0-9]+")]]
+    });
    }
 
-
+   get f() { return this.residenceRegisterForm.controls; }
   loadScript(scripted: any) {
     let node = undefined;
     let isFound = false;
@@ -65,7 +81,7 @@ export class ResidenceComponent implements OnInit {
           isFound = true;
         }
     }
-
+  
 	if (!isFound) {
 			node = document.createElement('script');
 	        node.src = scripted;
@@ -77,5 +93,18 @@ export class ResidenceComponent implements OnInit {
     }
     return node;
  }
+
+ onSubmit() {
+  this.submitted = true;
+
+  // stop here if form is invalid
+  console.log(this.residenceRegisterForm.value);
+  if (this.residenceRegisterForm.invalid) {
+      return;
+  }
+  console.log(this.residenceRegisterForm.value);
+  
+  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.residenceRegisterForm.value))
+}
 
 }
