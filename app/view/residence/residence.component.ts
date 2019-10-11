@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,ElementRef ,ViewChild } from '@angular/core';
 import { ConstantsService } from '../../common/services/constants.service';
 import {DataAccessService } from '../../common/services/data-access.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,15 +14,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ResidenceComponent implements OnInit {
   loadAPI: Promise<any>;
   env: string;
+  residencelat:string;
   api: string;
   cityData:any=[];
   furnData:any=[];
   amenData:any=[];
+  resi_ament_error=false;
+  resi_furn_error=false;
   residenceRegisterForm: FormGroup;
   submitted = false;
-  constructor(private dataccess: DataAccessService,private formBuilder: FormBuilder) {
+  selectedAmenties: any = [];
+  selectedFurnishing: any = [];
+  residentBlock=false;
+
+  constructor(private dataccess: DataAccessService,private formBuilder: FormBuilder,public element: ElementRef) {
     this.env=ConstantsService.baseURL;
     this.api=ConstantsService.baseApiURL;
+    this.element.nativeElement;
  
     this.loadAPI = new Promise((resolve) => {
     	let scriptsLoad=[];
@@ -64,8 +72,6 @@ export class ResidenceComponent implements OnInit {
       city: ['', [Validators.required]],
       address: ['', [Validators.required]],
       pincode: ['', [Validators.required]],
-      amneties: ['', [Validators.required]],
-      funshing: ['', [Validators.required]],
       roomcount: ['', [Validators.required,Validators.pattern("[0-9]+")]]
     });
    }
@@ -97,14 +103,60 @@ export class ResidenceComponent implements OnInit {
  onSubmit() {
   this.submitted = true;
 
-  // stop here if form is invalid
-  console.log(this.residenceRegisterForm.value);
-  if (this.residenceRegisterForm.invalid) {
-      return;
+
+  if(this.element.nativeElement.querySelector('[id="resi_ament"]').selectedOptions.length<1){
+    this.resi_ament_error=true;
+    return;
+  }else{
+    this.resi_ament_error=false;
+    this.selectedAmenties=[];
+    for (let i = 0; i < this.element.nativeElement.querySelector('[id="resi_ament"]').selectedOptions.length; i++) {
+      this.selectedAmenties.push(this.element.nativeElement.querySelector('[id="resi_ament"]').selectedOptions[i].attributes[1].value);
+    }
   }
-  console.log(this.residenceRegisterForm.value);
-  
-  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.residenceRegisterForm.value))
+
+  if(this.element.nativeElement.querySelector('[id="resi_furn"]').selectedOptions.length<1){
+    this.resi_furn_error=true;
+    return;
+  }else{
+    this.selectedFurnishing=[];
+    this.resi_furn_error=false;
+    for (let i = 0; i < this.element.nativeElement.querySelector('[id="resi_furn"]').selectedOptions.length; i++) {
+      this.selectedFurnishing.push(this.element.nativeElement.querySelector('[id="resi_furn"]').selectedOptions[i].attributes[1].value);
+    }
+  }
+  if (this.residenceRegisterForm.invalid) {
+    return;
+  }
+  if(this.element.nativeElement.querySelector('[id="residencelat"]').value==""){
+    alert('please select map , dislocate the marker');
+  }
+  let splitlocation=this.element.nativeElement.querySelector('[id="residencelat"]').value.split(",");
+  let finalResidenceSend:any={};
+  let cityData:any={};
+  cityData['city']=this.residenceRegisterForm.value.city;
+  cityData['houseNo']=this.residenceRegisterForm.value.houseno;
+  cityData['block']=this.residenceRegisterForm.value.block;
+  cityData['landmark']=this.residenceRegisterForm.value.landmark;
+  cityData['pincode']=this.residenceRegisterForm.value.pincode;
+  cityData['address']=this.residenceRegisterForm.value.address;
+  cityData['lat']=splitlocation[0];
+  cityData['lng']=splitlocation[1];
+
+  finalResidenceSend['name']=this.residenceRegisterForm.value.name;
+  finalResidenceSend['amenities']=this.selectedAmenties;
+  finalResidenceSend['furnishing']=this.selectedFurnishing;
+  finalResidenceSend['roomCount']=this.residenceRegisterForm.value.roomcount;
+  finalResidenceSend['location']=cityData;
+  finalResidenceSend['user']='2'; 
+  this.dataccess.postdata('http://local-serve.marvel.com/v1/set/save/resident',finalResidenceSend).subscribe(userdata =>{
+    this.residentBlock=true;     
+  });
+
+}
+
+onResidentShow(){
+  this.residentBlock=false;
 }
 
 }
