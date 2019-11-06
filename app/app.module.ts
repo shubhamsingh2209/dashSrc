@@ -10,6 +10,8 @@ import { EditProfileComponent } from './view/edit-profile/edit-profile.component
 import { ConstantsService } from './common/services/constants.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ResidenceComponent } from './view/residence/residence.component';
+import { RoomaddComponent } from './view/roomadd/roomadd.component';
+import { TicketComponent } from './view/ticket/ticket.component';
 
 
 
@@ -19,7 +21,9 @@ import { ResidenceComponent } from './view/residence/residence.component';
     AppComponent,
     SidebarComponent,
     EditProfileComponent,
-    ResidenceComponent
+    ResidenceComponent,
+    RoomaddComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,

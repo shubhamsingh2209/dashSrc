@@ -1,0 +1,112 @@
+                 <div *ngFor="let count of createRange(roomCount); let indexx1=index" (load)="checkfirst()">    
+                     <div class="heading basicaddroom"  style="padding: 0.75rem 1.25rem;margin-bottom: 0;background-color: rgba(0, 0, 0, 0.03);border-bottom: 0px solid transparent;margin-top: 3%">
+                        <span><b>Basic Room Details#{{count}} {{roomType}}</b></span>
+                        <span style="float: right;" *ngIf="roomCount>1 && count==1">
+                           <button type="button" class="btn btn-outline-success" id="roomdraft">Make similar changes to sibling rooms</button>
+                        </span>
+                        <span style="float: right;margin-top: -7px;display: none"><button type="button" class="btn btn-outline-success" id="editroomdraft">Edit</button></span>
+                     </div>
+                     <div style="border-bottom: 1px solid #d0caca;padding: 15px;" id="dataroom_{{count}}">
+                        <div class="row" id="residentshow" style="margin-top:2%">
+                           <div class="col-sm-2">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">RoomNo.<span style="color: red;">*</span></label>
+                                 <div class="col-sm-6">
+                                    <input type="text" class="form-control roomno{{count}}" placeholder="">
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-5">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Room Furnishing<span style="color: red;">*</span></label>
+                                 <div class="col-sm-8">
+                                    <select class="select2 form-control" id="{{roomType}}room_furn_{{count}}" multiple="multiple" style="height: 36px;width: 100%;">
+                                    <option>Select Furnishing</option>
+                                    <option *ngFor="let data of furnroomData.data" [value]="data.value">{{data.name}}</option>
+                                    
+                                 </select>
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-5">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Room Bathroom<span style="color: red;">*</span></label>
+                                 <div class="col-sm-8">
+                                    <select class="select2 form-control" id="{{roomType}}room_bath_{{count}}" multiple="multiple" style="height: 36px;width: 100%;">
+                                    <option>Select bath amen</option>
+                                    <option *ngFor="let data of roomBath.data" [value]="data.value">{{data.name}}</option>
+            
+                                 </select>
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     
+                       <div style="border: 1px solid #d0caca;box-shadow: 0px 1px 5px grey;padding: 15px;margin-top: 15px;" *ngFor="let k of createRange(bedcount); let indexx111=index">
+                        <span><b>Basic Bed Details: Bed {{k}}</b>
+                        <span style="float: right;" *ngIf="roomType!='single' && count==1">
+                           <button type="button" class="btn btn-outline-success" id="roomdraft" onclick="similarbed(this);">Make similar changes to sibling bed</button>
+                        </span></span>
+                        <div class="col-sm-12 row" id="bedshow" style="margin-top:2%;padding-left: 25px;">
+                           <div class="col-sm-2">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Bed no.<span style="color: red;">*</span></label>
+                                 <div class="col-sm-6">
+                                    <input type="text" class="form-control bedno{{count}}{{k}}" placeholder="">
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Bed furnishing<span style="color: red;">*</span></label>
+                                 <div class="col-sm-8">
+                                    <select class="select2 form-control" id="{{roomType}}bed_furn_{{count}}{{k}}" multiple="multiple" style="height: 36px;width: 100%;">
+                                    <option>Select bath amen</option>
+                                    <option *ngFor="let data of bedFurn.data" [value]="data.value">{{data.name}}</option>
+                                 </select>
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+            
+                        </div>
+                        <span><b>Basic Booking details</b></span>
+                        <div class="col-sm-12 row" id="bedshow" style="margin-top:2%;padding-left: 25px">
+                           <div class="col-sm-4">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Monthly charge<span style="color: red;">*</span></label>
+                                 <div class="col-sm-6">
+                                    <input type="text" class="form-control monthcharge{{count}}{{k}}" placeholder="">
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Annual charge<span style="color: red;">*</span></label>
+                                 <div class="col-sm-8">
+                                    <input type="text" class="form-control annualcharge{{count}}{{k}}" placeholder="">
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group row">
+                                 <label class="control-label col-form-label">Tenure<span style="color: red;">*</span></label>
+                                 <div class="col-sm-8">
+                                    <input type="text" class="form-control tenure{{count}}{{k}}" placeholder="">
+                                    <div class="invalid-feedback"></div>
+                                 </div>
+                              </div>
+                           </div>
+            
+                        </div>
+                     </div>
+                       
+                     </div>
+                  </div>
+         

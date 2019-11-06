@@ -144,7 +144,7 @@
                                               </div>     
                                          </td>
                                          <td>
-                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'single');">ADD</a></span>
+                                             <span><a class="btn" style="color:#fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" (click)="addRoom('single')">ADD</a></span>
                                          </td>
                                      </tr>
                                      <tr>
@@ -163,7 +163,7 @@
                                               </div>     
                                          </td>
                                          <td>
-                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'double');">ADD</a></span>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;"  (click)="addRoom('double')">ADD</a></span>
                                          </td>
                                      </tr>
                                      <tr>
@@ -183,7 +183,7 @@
                                               </div>     
                                          </td>
                                          <td>
-                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'triple');">ADD</a></span>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;"  (click)="addRoom('triple')">ADD</a></span>
                                          </td>
                                      </tr>
                                      <tr>
@@ -203,7 +203,7 @@
                                               </div>     
                                          </td>
                                          <td>
-                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="addroomblock(this,'four');">ADD</a></span>
+                                             <span><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" (click)="addRoom('four')">ADD</a></span>
                                          </td>
                                      </tr>
                                  </tbody>
@@ -212,10 +212,18 @@
                          </div>
                          <div class="col-md-6" style="text-align: center;"><img src="../../../assets/img/steps.png" style="width: 50%;"></div>
                       </div>
-                          <div class="singleroomdata card" style="display: none"></div>
-                            <div class="doubleroomdata card" style="display: none"></div>
-                            <div class="tripleroomdata card" style="display: none"></div>
-                            <div class="fourroomdata card" style="display: none"></div> 
+                          <div class="singleroomdata card" [hidden]="singleRoomDataShow">
+                              <app-roomadd [roomType]="roomSingleTypeadd" [roomCount]="roomSingleSelectedCount" [roomBath]="roomBath" [bedFurn]="bedFurn" [furnroomData]="furnroomData"  [bedcount]="bedcount"></app-roomadd>
+                          </div>
+                            <div class="doubleroomdata card" [hidden]="doubleRoomDataShow">
+                              <app-roomadd [roomType]="roomDoubleTypeadd" [roomCount]="roomDoubleSelectedCount" [roomBath]="roomBath" [bedFurn]="bedFurn" [furnroomData]="furnroomData" [bedcount]="bedcount"></app-roomadd>
+                           </div>
+                            <div class="tripleroomdata card" [hidden]="tripleRoomDataShow">
+                              <app-roomadd [roomType]="roomTripleTypeadd" [roomCount]="roomTripleSelectedCount" [roomBath]="roomBath" [bedFurn]="bedFurn" [furnroomData]="furnroomData" [bedcount]="bedcount"></app-roomadd>
+                           </div>
+                            <div class="fourroomdata card" [hidden]="fourRoomDataShow">
+                              <app-roomadd [roomType]="roomFourTypeadd" [roomCount]="roomFourSelectedCount" [roomBath]="roomBath" [bedFurn]="bedFurn" [furnroomData]="furnroomData" [bedcount]="bedcount"></app-roomadd>
+                           </div> 
                      <div class="lastsubmit" style="float: right;padding-bottom: 10px;display: none"><a class="btn" style="color: #fff;background-color: #28b779;padding: 2px 14px;border-color: #28b779;" onclick="finalsubmit(this);">Submit</a></div>        
                    </div>
                 </form>
