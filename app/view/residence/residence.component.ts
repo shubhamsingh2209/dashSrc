@@ -2,8 +2,7 @@ import { Component, OnInit, ViewEncapsulation,ElementRef ,ViewChild } from '@ang
 import { ConstantsService } from '../../common/services/constants.service';
 import {DataAccessService } from '../../common/services/data-access.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
+declare var $: any;
 @Component({
   selector: 'app-residence',
   templateUrl: './residence.component.html',
@@ -19,6 +18,13 @@ export class ResidenceComponent implements OnInit {
   cityData:any=[];
   furnData:any=[];
   amenData:any=[];
+
+  furnroomData:any=[];
+  roomBath:any=[];
+  bedFurn:any=[];
+  bedcount:number;
+  
+
   resi_ament_error=false;
   resi_furn_error=false;
   residenceRegisterForm: FormGroup;
@@ -26,6 +32,13 @@ export class ResidenceComponent implements OnInit {
   selectedAmenties: any = [];
   selectedFurnishing: any = [];
   residentBlock=false;
+  singleRoomDataShow=true;
+  doubleRoomDataShow=true;
+  tripleRoomDataShow=true;
+  fourRoomDataShow=true;
+  roomSingleSelectedCount:number;roomDoubleSelectedCount:number;roomTripleSelectedCount:number;roomFourSelectedCount:number;
+  roomSingleTypeadd:string;roomDoubleTypeadd:string;roomTripleTypeadd:string;roomFourTypeadd:string;
+
 
   constructor(private dataccess: DataAccessService,private formBuilder: FormBuilder,public element: ElementRef) {
     this.env=ConstantsService.baseURL;
@@ -54,15 +67,21 @@ export class ResidenceComponent implements OnInit {
    ngOnInit() {
     this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/city').subscribe(citydata => {
       this.cityData = citydata;
-      console.log(this.cityData);
     });
     this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/columns/resident/amenities').subscribe(amentdata => {
-      this.furnData = amentdata;
-      console.log(this.furnData);
+      this.amenData = amentdata;
     });
     this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/columns/resident/furnishing').subscribe(funisdata => {
-      this.amenData = funisdata;
-      console.log(this.amenData);
+      this.furnData = funisdata;
+    });
+    this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/columns/room/bathroom').subscribe(roombathdata => {
+      this.roomBath = roombathdata;
+    });
+    this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/columns/room/furnishing').subscribe(funisdata => {
+      this.furnroomData = funisdata;
+    });
+    this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/columns/bed/furnishing').subscribe(bed1Furn => {
+      this.bedFurn = bed1Furn;
     });
     this.residenceRegisterForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -158,5 +177,79 @@ export class ResidenceComponent implements OnInit {
 onResidentShow(){
   this.residentBlock=false;
 }
+
+/* add room data */
+addRoom(roomType : any){
+ if(roomType=='single'){
+   this.singleRoomDataShow=true;
+   let roomcount=this.element.nativeElement.getElementsByClassName('singleseater')[0].children[1].value;
+   let checkBoxdetail=this.element.nativeElement.querySelector('[id="seat1input"]').checked;
+   if(checkBoxdetail==false){
+     alert('please select the checkbox first');
+   }else if(roomcount<1){
+    alert('sorry the roomcount cannot be less than ZERO');
+   }else{
+     this.singleRoomDataShow=false;
+     this.roomSingleSelectedCount=roomcount;
+     this.roomSingleTypeadd='single';
+   }
+  }
+  if(roomType=='double'){
+    this.doubleRoomDataShow=true;
+    let roomcount=this.element.nativeElement.getElementsByClassName('doubleseater')[0].children[1].value;
+    let checkBoxdetail=this.element.nativeElement.querySelector('[id="seat2input"]').checked;
+    if(checkBoxdetail==false){
+      alert('please select the checkbox first');
+    }else if(roomcount<1){
+     alert('sorry the roomcount cannot be less than ZERO');
+    }else{
+      this.doubleRoomDataShow=false;
+      this.roomDoubleSelectedCount=roomcount;
+     this.roomDoubleTypeadd='double';
+    }
+   }
+   if(roomType=='triple'){
+    this.tripleRoomDataShow=true;
+    let roomcount=this.element.nativeElement.getElementsByClassName('tripleseater')[0].children[1].value;
+    let checkBoxdetail=this.element.nativeElement.querySelector('[id="seat3input"]').checked;
+    if(checkBoxdetail==false){
+      alert('please select the checkbox first');
+    }else if(roomcount<1){
+     alert('sorry the roomcount cannot be less than ZERO');
+    }else{
+      this.tripleRoomDataShow=false;
+      this.roomTripleSelectedCount=roomcount;
+     this.roomTripleTypeadd='triple';
+    }
+   }
+   if(roomType=='four'){
+    this.fourRoomDataShow=true;
+    let roomcount=this.element.nativeElement.getElementsByClassName('fourseater')[0].children[1].value;
+    let checkBoxdetail=this.element.nativeElement.querySelector('[id="seat4input"]').checked;
+    if(checkBoxdetail==false){
+      alert('please select the checkbox first');
+    }else if(roomcount<1){
+     alert('sorry the roomcount cannot be less than ZERO');
+    }else{
+      this.fourRoomDataShow=false;
+      this.roomFourSelectedCount=roomcount;
+     this.roomFourTypeadd='four';
+    }
+   }
+   if(roomType=='single')
+      this.bedcount=1;
+    else if(roomType=='doubel')
+      this.bedcount=2;
+    else if(roomType=='triple')
+      this.bedcount=3;
+    else if(roomType=='four')
+      this.bedcount=4;
+
+      $('.residentshow').ready(function(){
+        $('.select2').select2();
+     });
+ }
+
+/* add room data end here */
 
 }
