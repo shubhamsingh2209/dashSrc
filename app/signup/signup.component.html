@@ -1,0 +1,51 @@
+<div id="loginbox" style="width:45%">            
+<form id="loginform" class="form-vertical" [formGroup]="signupData" (ngSubmit)="onSubmit()">
+    <div class="control-group normal_text"> <h3><img src="http://localhost:4200/assets/img/logo.png" alt="Logo" /></h3></div>
+                 <div class="control-group">
+                   <div class="controls">  
+                       <div class="main_input_box">
+                           <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" id="firstName" placeholder="Firstname" formControlName="firstname" style="width:31%"/>
+                           <span class="add-on bg_lg" style="margin-left: 17px;"><i class="icon-user"> </i></span><input type="text" id="lastName" placeholder="Lastname" formControlName="lastname" style="width:30%" />
+                           
+                   </div>
+                   <span class="alert_name redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.firstname.errors && logincontrols.firstname.errors.required">Required</span>
+               </div>
+               </div>
+          
+           <div class="control-group">
+               <div class="controls">
+                   <div class="main_input_box">
+                       <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="email" id="userEmail" placeholder="UserEmail" formControlName="email" />
+                   </div>
+                   <span class="alert_email redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.email.errors && logincontrols.email.errors.required">Required</span>
+                  <span class="alert_email redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.email.errors && logincontrols.email.errors.pattern">*Please provide valid email</span>
+                   <!-- <span class="alert_email redalert" style="margin-left: 40px;display: none"></span> -->
+               </div>
+           </div>
+           <div class="control-group">
+               <div class="controls">
+                   <div class="main_input_box">
+                       <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" id="userPassword" placeholder="Password" formControlName="password" />
+                   </div>
+                   <span class="alert_name redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.password.errors && logincontrols.password.errors.required">Required</span>
+                   <span class="alert_name redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.password.errors && logincontrols.password.errors.pattern">*Please provide valid password</span>
+               </div>
+           </div>
+           <div class="control-group">
+               <div class="controls">
+                   <div class="main_input_box">
+                       <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" id="repeatPassword" placeholder="RepeatPassword" formControlName="repeatpass" />
+                   </div>
+                   <span class="alert_name redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.repeatpass.errors && logincontrols.repeatpass.errors.required">Required</span>
+                   <span class="alert_repeatpass redalert" style="margin-left: 40px;" *ngIf="repeatPassError">*password did not match each other</span>
+               </div>
+           </div>
+           <div class="alert alert-success" id="verifyalert" style="width: 71%;margin-left: 10%;" *ngIf="resendhtml">
+               <p>*We have send you a verification mail to you email. <a (click)="sendverify()">Resend link</a> </p>
+           </div>
+           <div class="form-actions">
+               <span class="pull-left"><a href="/login" style="margin-left: 64%;" class="flip-link btn btn-info" id="to-recover">Login</a></span>
+               <span class="pull-right" style="margin-right: 7%;"><button type="submit" class="btn btn-success"> Signup</button></span>
+           </div>
+       </form>
+       </div>

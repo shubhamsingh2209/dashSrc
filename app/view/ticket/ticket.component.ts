@@ -13,6 +13,7 @@ export class TicketComponent implements OnInit {
   loadAPI: Promise<any>;
   env: string;
   api: string;
+  ticketData:any=[];
 
   constructor(private dataccess: DataAccessService) {
     this.env=ConstantsService.baseURL;
@@ -37,6 +38,10 @@ export class TicketComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.dataccess.getEmployee('http://local-serve.marvel.com/v1/get/ticket/4').subscribe(ticketdata => {
+      this.ticketData =ticketdata;
+      debugger;
+    });
   }
 
   loadScript(scripted: any) {
