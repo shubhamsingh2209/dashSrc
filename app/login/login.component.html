@@ -1,0 +1,52 @@
+<div id="loginbox">            
+    <form id="loginform" class="form-vertical"  [formGroup]="loginData" (ngSubmit)="onSubmit()">
+ <div class="control-group normal_text"> <h3><img src="http://localhost:4200/assets/img/logo.png" alt="Logo" /></h3></div>
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="email" formControlName="email" id="userEmail" placeholder="Username" />
+                   
+                </div>
+                 <span class="alert_email redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.email.errors && logincontrols.email.errors.required">Required</span>
+                 <span class="alert_email redalert" style="margin-left: 40px;" *ngIf="submitted && logincontrols.email.errors && logincontrols.email.errors.pattern">*Please provide valid email</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" id="userPassword" placeholder="Password" formControlName="password" />
+                    <span class="alert_password redalert" style="margin-left: 40px;"  *ngIf="submitted && logincontrols.password.errors && logincontrols.password.errors.required">Required</span>
+                 </div>
+            </div>
+        </div>
+        <div class="alert alert-error" id="errordata" style="width: 71%;margin-left: 10%;" *ngIf="errorResponse1.show">
+            <ng-container *ngIf="errorResponse1.profileVerified">
+                <strong>Error!</strong>you have not verified your account.Please verified first. 
+            </ng-container>
+            <ng-container *ngIf="errorResponse1.emailInvalid">
+                <strong>Error!</strong>You have not registered yet.Signup first. 
+            </ng-container>
+            <ng-container *ngIf="errorResponse1.passwordInvalid">
+                <strong>Error!</strong>Password wrong. 
+            </ng-container>
+        </div>
+        <div class="form-actions">
+            <span class="pull-left" style="margin-left: 5%;"><a href="/signup" class="flip-link btn btn-info" id="to-recover">Signup</a></span>
+            <span class="pull-right" style="margin-right: 5%;"><button type="submit" class="btn btn-success"> Login</button></span>
+        </div>
+    </form>
+    <!-- <form id="recoverform" action="#" class="form-vertical">
+<p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
+
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                </div>
+            </div>
+       
+        <div class="form-actions">
+            <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
+            <span class="pull-right"><a class="btn btn-info"/>Reecover</a></span>
+        </div>
+    </form> -->
+</div>

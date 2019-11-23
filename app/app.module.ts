@@ -12,6 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResidenceComponent } from './view/residence/residence.component';
 import { RoomaddComponent } from './view/roomadd/roomadd.component';
 import { TicketComponent } from './view/ticket/ticket.component';
+import { LoginComponent } from './login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { SignupComponent } from './signup/signup.component';
+
 
 
 
@@ -23,7 +27,9 @@ import { TicketComponent } from './view/ticket/ticket.component';
     EditProfileComponent,
     ResidenceComponent,
     RoomaddComponent,
-    TicketComponent
+    TicketComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,7 @@ import { TicketComponent } from './view/ticket/ticket.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ConstantsService],
+  providers: [ConstantsService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

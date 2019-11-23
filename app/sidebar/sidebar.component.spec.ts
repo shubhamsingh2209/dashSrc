@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
-import { EditProfileComponent } from './view/edit-profile/edit-profile.component';
+import { EditProfileComponent } from '../view/edit-profile/edit-profile.component';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;

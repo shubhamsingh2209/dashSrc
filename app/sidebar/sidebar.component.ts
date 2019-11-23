@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConstantsService } from '../common/services/constants.service';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -12,13 +14,13 @@ export class SidebarComponent implements OnInit {
   loadAPI: Promise<any>;
   env:string;
 
-constructor() {
+constructor(private cookieService: CookieService) {
     this.env=ConstantsService.baseURL;
     this.loadAPI = new Promise((resolve) => {
     	let scriptsLoad=[];
 		scriptsLoad[0]=this.env+'/assets/js/jquerydashboard.min.js';
 		scriptsLoad[1]=this.env+'/assets/js/bootstrapdashboard.min.js';
-		scriptsLoad[2]=this.env+'/../../assets/js/sidebarmenu.js';
+		scriptsLoad[2]=this.env+'/assets/js/sidebarmenu.js';
 		scriptsLoad[3]=this.env+'/assets/js/mar_common.js';
 		for(let j=0;j<scriptsLoad.length;j++){
 	        let node = this.loadScript(scriptsLoad[j]);
@@ -61,6 +63,11 @@ loadScript(scripted) {
         	return node;
     }
     return node;
+ }
+ logout(){
+    this.cookieService.delete('token');
+    this.cookieService.delete('user');
+    window.location.replace('/login')
  }
 
 }

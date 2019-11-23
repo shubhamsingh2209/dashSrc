@@ -931,9 +931,9 @@ function errorthrow(val)
 
  $(document).ready(function() {
  var table = $('#zero_config').DataTable({
-  "language": {
-    "emptyTable": '<span style="font-size: xx-large;">No ticket found<i class="mdi mdi-delete-empty" ></i></span>'
-  }// },
+  // "language": {
+  //   "emptyTable": '<span style="font-size: xx-large;">No ticket found<i class="mdi mdi-delete-empty" ></i></span>'
+  // }// },
   //  "ajax": {
   // 	"url": "/ajax?for=ticket&id=2",
   // 	"data": function ( d ) {
@@ -941,22 +941,22 @@ function errorthrow(val)
   //  			}
   // }    
 });
-$('#zero_config tbody tr').css("cursor","pointer")
-$('#zero_config tbody').on( 'click', 'tr', function () {
-  // console.log(table.row( this ).data());
+// $('#zero_config tbody tr').css("cursor","pointer")
+// $('#zero_config tbody').on( 'click', 'tr', function () {
+//   // console.log(table.row( this ).data());
   
-  swal({
+//   swal({
 
-      title: "",
-      buttonsStyling: false,
-       html:
-          '<div class="card form-horizontal"> <div class="card-body"> <h4 class="card-title">Ticket No. '+table.row( this ).data()[0]+' '+table.row( this ).data()[3]+'</h4> <div class="form-group row"> <label for="fname" class="swal-input-group">Raised by:</label> <input type="text" class="form-control" value="'+table.row( this ).data()[6]+'" disabled="true"></div> <div class="form-group row"> <label for="lname" class="swal-input-group">Open on:</label> <input type="datetime" class="form-control opened-on" disabled="true" value="'+table.row( this ).data()[4]+'"> </div> <div class="form-group row"> <label for="lname" class="swal-input-group">Issue Type:</label> <input type="text" class="form-control" id="lname" placeholder="Issue Type" value="'+table.row( this ).data()[1]+'" disabled="disabled"> </div><div class="form-group row"> <label for="cono1" class="swal-input-group">Message</label> <textarea class="form-control" disabled="true">'+table.row( this ).data()[2]+'</textarea></div> </div> <div class="border-top">  </div> </div><div class="card"><form class="form-horizontal"><div class="card-body"><div class="form-group row"><label class="swal-input-group">Closed on:</label><input type="datetime" class="form-control closed-on" name="closed-on" placeholder="Please Select Closed Date"></div><div class="hide"><input type="text" name="ticket-id" value="'+table.row( this ).data()[0]+'"></div><div class="form-group row"><label class="swal-input-group">Comment:</label><textarea class="form-control" placeholder="Comment" name="comment"></textarea></div></div><div class="border-top"><div class="card-body"> <button type="button" class="btn btn-primary">Submit</button> </div></div></form></div>',
-      confirmButtonClass: false,
-      showCloseButton: false,
-      showConfirmButton: false
-  }).catch(swal.noop);
-  jQuery('.opened-on').datetimepicker();
+//       title: "",
+//       buttonsStyling: false,
+//        html:
+//           '<div class="card form-horizontal"> <div class="card-body"> <h4 class="card-title">Ticket No. '+table.row( this ).data()[0]+' '+table.row( this ).data()[3]+'</h4> <div class="form-group row"> <label for="fname" class="swal-input-group">Raised by:</label> <input type="text" class="form-control" value="'+table.row( this ).data()[6]+'" disabled="true"></div> <div class="form-group row"> <label for="lname" class="swal-input-group">Open on:</label> <input type="datetime" class="form-control opened-on" disabled="true" value="'+table.row( this ).data()[4]+'"> </div> <div class="form-group row"> <label for="lname" class="swal-input-group">Issue Type:</label> <input type="text" class="form-control" id="lname" placeholder="Issue Type" value="'+table.row( this ).data()[1]+'" disabled="disabled"> </div><div class="form-group row"> <label for="cono1" class="swal-input-group">Message</label> <textarea class="form-control" disabled="true">'+table.row( this ).data()[2]+'</textarea></div> </div> <div class="border-top">  </div> </div><div class="card"><form class="form-horizontal"><div class="card-body"><div class="form-group row"><label class="swal-input-group">Closed on:</label><input type="datetime" class="form-control closed-on" name="closed-on" placeholder="Please Select Closed Date"></div><div class="hide"><input type="text" name="ticket-id" value="'+table.row( this ).data()[0]+'"></div><div class="form-group row"><label class="swal-input-group">Comment:</label><textarea class="form-control" placeholder="Comment" name="comment"></textarea></div></div><div class="border-top"><div class="card-body"> <button type="button" class="btn btn-primary">Submit</button> </div></div></form></div>',
+//       confirmButtonClass: false,
+//       showCloseButton: false,
+//       showConfirmButton: false
+//   }).catch(swal.noop);
+//   jQuery('.opened-on').datetimepicker();
   
-});
+// });
 
  });
